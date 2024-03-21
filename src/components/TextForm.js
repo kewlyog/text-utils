@@ -31,7 +31,7 @@ export default function TextForm(props) {
     return (
         <>
             <div className="container my-3">
-                <h3>{props.heading}</h3>
+                <h3 className='mb-4'>{props.heading}</h3>
                 <div className="mb-3">
                     <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange}
                         style={{
@@ -40,15 +40,15 @@ export default function TextForm(props) {
                         }}>
                     </textarea>
                 </div>
-                <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
-                <button className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Convert to Lowercase</button>
-                <button className="btn btn-primary mx-1 my-1" onClick={handleResetClick}>Reset</button>
-                <button className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy</button>
+                <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+                <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Convert to Lowercase</button>
+                <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick={handleResetClick}>Reset</button>
+                <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy</button>
             </div>
             <div className="container my-3">
                 <h2>Your text summary</h2>
-                <p>{text === '' ? 0 : text.replace(/\s/g, '').length} words, {text.length} characters</p>
-                <p>{(0.008 * text.split(" ").length)} Minutes read</p>
+                <p>{text.split(/\s+/).filter((element) => { return element.length !== 0 }).length} words, {text.length} characters</p>
+                <p>{(0.008 * text.split(" ").filter((element) => { return element.length !== 0 }).length)} Minutes read</p>
                 <h2>Preview</h2>
                 <p>{text}</p>
             </div>
